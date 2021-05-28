@@ -4,6 +4,11 @@ import requests
 app = Flask(__name__)
 
 def sub_user(email):
+    with open("subscribe.txt", "r") as f:
+        mails = f.readlines()
+        if email in mails:
+            return
+        
     with open("subscribe.txt","at") as f:
         f.write(email+'\n')
 
