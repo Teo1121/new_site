@@ -29,10 +29,13 @@ def index():
     if request.method == "POST":
         email = str(request.form.get('email'))
         tp = str(request.form.get('submit'))
-        if tp == "subscribe":
-            sub_user(email)
-        if tp == "unsubscribe":
-            unsub_user(email)
+        if '@' in email:
+            if tp == "subscribe":
+                sub_user(email)
+                return "<p>Thanks for subscribing</p>"
+            if tp == "unsubscribe":
+                unsub_user(email)
+                return "<p>Goodbye</p>"
     return render_template("index.html")
 
 if __name__ == '__main__':

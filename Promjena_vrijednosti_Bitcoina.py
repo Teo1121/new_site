@@ -22,11 +22,12 @@ mail = imaplib.IMAP4_SSL("imap.gmail.com" )
 mail.login(sender_mail,password) 
 mail.select('inbox')
 
-# the list of email to send the data
-with open("subscribe.txt", "rt") as f:
-    mails = f.readlines()
-
 while True:
+    
+    # the list of email to send the data
+    with open("subscribe.txt", "rt") as f:
+        mails = f.readlines()
+        
     # get the html as plain text
     html = requests.get(url).text
 
@@ -59,7 +60,6 @@ To unsubscribe send an e-mail to this mail with the word unsubscribe."""
 
     # get all mail in the inbox
     data = mail.search(None, 'ALL')
-
     # for every mail
     for i in data[1][0].decode().split():
         
